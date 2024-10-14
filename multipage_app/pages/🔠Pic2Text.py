@@ -8,7 +8,7 @@ st.title("Text Extraction from Images")
 
 # Initialize the EasyOCR reader with multiple languages
 # Example: English ('en'), Spanish ('es'), French ('fr'), and German ('de')
-reader = easyocr.Reader(['en', 'es', 'fr', 'de', 'it', 'pt', 'zh', 'ja', 'ko'])
+reader = easyocr.Reader(['en', 'es', 'fr', 'de'])
 
 # File uploader for image files
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
