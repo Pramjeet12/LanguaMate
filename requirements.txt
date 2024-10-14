@@ -2,7 +2,7 @@ streamlit
 scikit-learn
 pickles
 streamlit-lottie
-pytesseract
+easyocr
 opencv-python
 pillow
 numpy
