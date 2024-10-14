@@ -1,0 +1,9 @@
+streamlit
+scilit-learn
+pickles
+streamlit-lottie
+pytesseract
+open-cv
+pillow
+numpy
+deep-translator 

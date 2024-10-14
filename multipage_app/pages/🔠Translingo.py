@@ -59,5 +59,5 @@ if st.button("Translate"):
 
 st.markdown("---")  # Adds a horizontal line
 if st.button("About the Developer"):
-    st.write("Created by: Kumar")  # Replace with your name
+    st.write("Created by: ?????Kumar")  # Replace with your name
 
