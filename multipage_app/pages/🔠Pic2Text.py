@@ -1,6 +1,8 @@
 import streamlit as st
 import easyocr
 from PIL import Image
+import cv2
+
 
 # Initialize EasyOCR reader
 reader = easyocr.Reader(['en', 'es', 'fr', 'de'])  # Add more languages as needed
@@ -16,9 +18,15 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Uploaded Image', use_column_width=True)
 
+
+    # Convert the image to an OpenCV format
+    img = np.array(image)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+
     # Extract text from image
 
-    result = reader.readtext(image)
+    result = reader.readtext(img)
 
     # Display extracted text
     if result:
