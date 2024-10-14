@@ -6,7 +6,7 @@ import numpy as np
 
 
 # Initialize EasyOCR reader
-reader = easyocr.Reader(['en', 'es', 'fr', 'de', 'it', 'nl', 'pt', 'ru', 'ch_sim', 'ja', 'ko'])
+reader = easyocr.Reader(['en', 'es', 'fr', 'de', 'it', 'nl', 'pt'])
 # Add more languages as needed
 
 # Streamlit app title
