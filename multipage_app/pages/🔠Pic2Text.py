@@ -2,6 +2,7 @@ import streamlit as st
 import easyocr
 from PIL import Image
 import cv2
+import numpy as np
 
 
 # Initialize EasyOCR reader
