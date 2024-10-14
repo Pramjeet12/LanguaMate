@@ -6,8 +6,7 @@ import numpy as np
 
 
 # Initialize EasyOCR reader
-reader = easyocr.Reader(reader = easyocr.Reader(['en', 'es', 'fr', 'de', 'it', 'nl', 'pt', 'ru', 'ch_sim', 'ja', 'ko'])
-)  # Add more languages as needed
+reader = easyocr.Reader(reader = easyocr.Reader(['en', 'es', 'fr', 'de']))  # Add more languages as needed
 
 # Streamlit app title
 st.title("Text Extraction from Images")
