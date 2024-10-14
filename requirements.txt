@@ -1,9 +1,9 @@
 streamlit
-scilit-learn
+scikit-learn
 pickles
 streamlit-lottie
 pytesseract
-open-cv
+opencv-python
 pillow
 numpy
 deep-translator 
