@@ -1,7 +1,6 @@
 import streamlit as st
-from PIL import Image
+from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract
-import cv2
 import numpy as np
 
 # Configure tesseract path if needed (for local development)
@@ -18,17 +17,23 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Uploaded Image', use_column_width=True)
     
-    # Convert to OpenCV format
-    img = np.array(image)
+    # Preprocess image for better OCR results using PIL
+    # Convert to grayscale
+    if image.mode != 'L':
+        gray_image = image.convert('L')
+    else:
+        gray_image = image
     
-    # Preprocess image for better OCR results
-    gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-    # Apply threshold to get better text recognition
-    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # Enhance contrast and sharpness
+    enhancer = ImageEnhance.Contrast(gray_image)
+    enhanced_image = enhancer.enhance(2.0)
+    
+    # Apply sharpening filter
+    sharpened_image = enhanced_image.filter(ImageFilter.SHARPEN)
     
     try:
         # Extract text using pytesseract
-        extracted_text = pytesseract.image_to_string(thresh, config='--psm 6')
+        extracted_text = pytesseract.image_to_string(sharpened_image, config='--psm 6')
         
         # Display extracted text
         if extracted_text.strip():
