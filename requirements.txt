@@ -2,8 +2,6 @@ streamlit
 scikit-learn
 pickles
 streamlit-lottie
-pytesseract
-pillow
 numpy
 deep-translator 
 torch
