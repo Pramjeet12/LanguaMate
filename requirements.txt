@@ -3,7 +3,6 @@ scikit-learn
 pickles
 streamlit-lottie
 pytesseract
-opencv-python
 pillow
 numpy
 deep-translator 
