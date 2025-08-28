@@ -1,13 +1,11 @@
 import streamlit as st
-import easyocr
 from PIL import Image
+import pytesseract
 import cv2
 import numpy as np
 
-
-# Initialize EasyOCR reader
-reader = easyocr.Reader(['en', 'es', 'fr', 'de'])
-# Add more languages as needed
+# Configure tesseract path if needed (for local development)
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Streamlit app title
 st.title("Text Extraction from Images")
@@ -19,22 +17,24 @@ if uploaded_file is not None:
     # Display the uploaded image
     image = Image.open(uploaded_file)
     st.image(image, caption='Uploaded Image', use_column_width=True)
-
-
-    # Convert the image to an OpenCV format
+    
+    # Convert to OpenCV format
     img = np.array(image)
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-
-
-    # Extract text from image
-
-    result = reader.readtext(img)
-
-    # Display extracted text
-    if result:
-        st.subheader("Extracted Text:")
-        extracted_text = " ".join([text for (_, text, _) in result])
-        st.text_area("", value=extracted_text, height=100)
-    else:
-        st.write("No text found.")
-
+    
+    # Preprocess image for better OCR results
+    gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    # Apply threshold to get better text recognition
+    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    
+    try:
+        # Extract text using pytesseract
+        extracted_text = pytesseract.image_to_string(thresh, config='--psm 6')
+        
+        # Display extracted text
+        if extracted_text.strip():
+            st.subheader("Extracted Text:")
+            st.text_area("", value=extracted_text, height=100)
+        else:
+            st.write("No text found.")
+    except Exception as e:
+        st.error(f"Error extracting text: {str(e)}")
